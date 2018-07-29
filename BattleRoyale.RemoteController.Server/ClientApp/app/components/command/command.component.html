@@ -1,0 +1,20 @@
+<h1>Command Panel</h1>
+
+<div class="bash" *ngIf="connected">
+    <ul class="list-messages">
+        <li *ngFor="let message of messages">
+            <span *ngIf="message.messageType == 1" style="white-space: pre-line; color: yellow">
+                {{message.message}}</span>
+            <span *ngIf="message.messageType == 0">
+                <strong>Server></strong> {{message.message}}
+            </span>
+        </li>
+    </ul>
+    <span style="padding-left: 7px; color: white">
+        <strong>Server> </strong>{{textInputMessage}}
+    </span>
+    
+</div>
+<div *ngIf="connected">
+    <input class="server-message" type="text" [(ngModel)]="textInputMessage" (keydown.enter)="sendMessage()">
+</div>

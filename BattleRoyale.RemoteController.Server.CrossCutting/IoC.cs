@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
 using BatteRoyale.RemoteController.Server.Services;
+using System.Collections.Generic;
 using BatteRoyale.RemoteController.Server.Services.Interface;
 
 namespace BattleRoyale.RemoteController.Server.CrossCutting
@@ -20,6 +21,8 @@ namespace BattleRoyale.RemoteController.Server.CrossCutting
 
             //Services
             services.AddSingleton<IRemoteControlService, RemoteControlService>();
+
+            //services.AddScoped<ISocketConnectionService, SocketConnectionService>();
         }
     }
 }

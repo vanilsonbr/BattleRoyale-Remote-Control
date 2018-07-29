@@ -7,11 +7,15 @@ import { Http } from '@angular/http';
 })
 export class FetchDataComponent {
     public clients: Client[] | undefined;
+    public clientsRetrieved: boolean = false;
 
     constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
         http.get(baseUrl + 'api/RemoteControl/ConnectedClients').subscribe(result => {
             this.clients = result.json() as Client[];
-        }, error => console.error(error));
+            this.clientsRetrieved = true; 
+        }, error => {
+            console.error(error);
+        });
     }
 }
 
@@ -38,5 +42,5 @@ interface Client {
     isFirewallActivated: boolean;
     windowsSpecs: WindowsSpecs;
     installedDotNetVersion: string;
-    hardDriveInformation: HardDriveInformation;
+    hardDriveInformation: HardDriveInformation[];
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BattleRoyale.RemoteController.Server.Domain
 {
@@ -10,6 +11,6 @@ namespace BattleRoyale.RemoteController.Server.Domain
         public bool IsFirewallActivated { get; set; }
         public WindowsSpecs WindowsSpecs { get; set; }
         public string InstalledDotNetVersion { get; set; }
-        public HardDriveInformation HardDriveInformation { get; set; }
+        public List<HardDriveInformation> HardDriveInformation { get; set; }
     }
 }

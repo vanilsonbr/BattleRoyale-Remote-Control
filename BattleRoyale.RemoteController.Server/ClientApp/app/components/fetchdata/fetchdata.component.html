@@ -1,38 +1,42 @@
 <h1>Connected Devices</h1>
 
-<p>
-    Those are the machines currently connected to the server <br />
-    When you execute the command in the command line, those machines will execute the same command locally
-</p>
+<p *ngIf="!clients || (!!clients && !clientsRetrieved)"><em>Loading...</em></p>
 
-<p *ngIf="!clients"><em>Loading...</em></p>
+<h4 *ngIf="!!clients && clients.length == 0 && clientsRetrieved">
+    Seems like no client is connected right now :(
+</h4>
 
+<div *ngIf="clients && clients.length>0 && clientsRetrieved">
+    <p>
+        Those are the machines currently connected to the server <br />
+        When you execute the command in the command line, those machines will execute the same command locally
+    </p>
+    <a [routerLink]="['/commandAll']">
+        <span class='glyphicon glyphicon-cog'></span> Execute commands for ALL machine connected
+    </a>
 
-<a [routerLink]="['/commandAll']">
-    <span class='glyphicon glyphicon-cog'></span> Execute commands for ALL machine connected
-</a>
-
-<table class='table table-hover' *ngIf="clients">
-    <thead>
-        <tr>
-            <th>Machine Name</th>
-            <th>Windows Specs</th>
-            <th>HardDrive Info</th>
-            <th>IP Address</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let client of clients">
-            <td>{{ client.machineName }}</td>
-            <td>OS: {{ client.windowsSpecs.version }} Service Pack {{ client.windowsSpecs.servicePack }}</td>
-            <td>{{ client.hardDriveInformation.availableSize }}MB out of {{ client.hardDriveInformation.totalSize }}Mb available</td>
-            <td>{{ client.localIPAddress }}</td>
-            <td>
-                <a [routerLink]="['/command', client.localIPAddress]">
-                    <span class='glyphicon glyphicon-cog' title="Execute commands for this machine"></span>
-                </a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <table class='table table-hover'>
+        <thead>
+            <tr>
+                <th>Machine Name</th>
+                <th>Windows Specs</th>
+                <th>HardDrive Info</th>
+                <th>IP Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let client of clients">
+                <td>{{ client.machineName }}</td>
+                <td>OS: {{ client.windowsSpecs.version }} {{ client.windowsSpecs.servicePack }}</td>
+                <td>{{ client.hardDriveInformation[0].availableSize/1024 }} MB out of {{ client.hardDriveInformation[0].totalSize/1024 }} MB available</td>
+                <td>{{ client.localIPAddress }}</td>
+                <td>
+                    <a [routerLink]="['/command', client.localIPAddress]">
+                        <span class='glyphicon glyphicon-cog' title="Execute commands for this machine"></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

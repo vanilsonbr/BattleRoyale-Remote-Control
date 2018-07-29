@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleRoyale.RemoteController.Server", "BattleRoyale.RemoteController.Server\BattleRoyale.RemoteController.Server.csproj", "{5291E432-0A67-46E3-99F4-2450CC253559}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BattleRoyale.RemoteController.Server", "BattleRoyale.RemoteController.Server\BattleRoyale.RemoteController.Server.csproj", "{5291E432-0A67-46E3-99F4-2450CC253559}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatteRoyale.RemoteController.Server.Services", "BatteRoyale.RemoteController.Server.Services\BatteRoyale.RemoteController.Server.Services.csproj", "{E72344FD-4E03-48DF-88BE-D0836C87B83D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatteRoyale.RemoteController.Server.Services", "BatteRoyale.RemoteController.Server.Services\BatteRoyale.RemoteController.Server.Services.csproj", "{E72344FD-4E03-48DF-88BE-D0836C87B83D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleRoyale.RemoteController.Server.Domain", "BattleRoyale.RemoteController.Server.Domain\BattleRoyale.RemoteController.Server.Domain.csproj", "{F2D4EE1B-F5ED-425A-8582-9048684D3DCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BattleRoyale.RemoteController.Server.Domain", "BattleRoyale.RemoteController.Server.Domain\BattleRoyale.RemoteController.Server.Domain.csproj", "{F2D4EE1B-F5ED-425A-8582-9048684D3DCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleRoyale.RemoteController.Server.CrossCutting", "BattleRoyale.RemoteController.Server.CrossCutting\BattleRoyale.RemoteController.Server.CrossCutting.csproj", "{08015B0F-46EA-4487-AB32-93A32EF11538}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BattleRoyale.RemoteController.Server.CrossCutting", "BattleRoyale.RemoteController.Server.CrossCutting\BattleRoyale.RemoteController.Server.CrossCutting.csproj", "{08015B0F-46EA-4487-AB32-93A32EF11538}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Web", "1 - Web", "{1F2C71ED-FC14-4606-845D-BC1499F771E6}"
 EndProject
@@ -18,6 +18,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - CrossCutting", "4 - CrossCutting", "{0256C07F-19CB-4C37-92BD-6EA9053854BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{B39988F4-87EF-4709-B7FC-2D13BD86B453}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleRoyale.RemoteController.Server.Services.Test", "BattleRoyale.RemoteController.Server.Services.Test\BattleRoyale.RemoteController.Server.Services.Test.csproj", "{B4E9F368-CE6E-43A9-B54E-BA0A563CF873}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Tests", "5 - Tests", "{4699EAFE-0930-4EB4-9AD2-7EB35A662188}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,10 @@ Global
 		{08015B0F-46EA-4487-AB32-93A32EF11538}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08015B0F-46EA-4487-AB32-93A32EF11538}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08015B0F-46EA-4487-AB32-93A32EF11538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4E9F368-CE6E-43A9-B54E-BA0A563CF873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4E9F368-CE6E-43A9-B54E-BA0A563CF873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4E9F368-CE6E-43A9-B54E-BA0A563CF873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4E9F368-CE6E-43A9-B54E-BA0A563CF873}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +58,7 @@ Global
 		{E72344FD-4E03-48DF-88BE-D0836C87B83D} = {B29124DF-7129-4532-9421-9C4FA48AC842}
 		{F2D4EE1B-F5ED-425A-8582-9048684D3DCB} = {B39988F4-87EF-4709-B7FC-2D13BD86B453}
 		{08015B0F-46EA-4487-AB32-93A32EF11538} = {0256C07F-19CB-4C37-92BD-6EA9053854BD}
+		{B4E9F368-CE6E-43A9-B54E-BA0A563CF873} = {4699EAFE-0930-4EB4-9AD2-7EB35A662188}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F726BC92-D718-4A24-8581-DE34FA558691}

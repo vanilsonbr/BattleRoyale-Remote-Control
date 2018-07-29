@@ -21,6 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="CommandLineWebSocketHandler.cs" />
+    <Compile Remove="WebSocketManagerMiddleware.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BattleRoyale.RemoteController.Server.CrossCutting\BattleRoyale.RemoteController.Server.CrossCutting.csproj" />
     <ProjectReference Include="..\BattleRoyale.RemoteController.Server.Domain\BattleRoyale.RemoteController.Server.Domain.csproj" />
   </ItemGroup>

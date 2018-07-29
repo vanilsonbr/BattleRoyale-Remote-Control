@@ -1,0 +1,29 @@
+﻿div.bash {
+    width: 100%;
+    min-height: 500px;
+    max-height: 500px;
+    margin: 3% 3% 1px 0;
+    overflow-y: scroll;
+    background-color: black;
+    border-radius: 3px 3px 0 0;
+}
+
+ul.list-messages {
+    list-style: none;
+    padding: 5px 7px;
+    color: white;
+}
+
+input.server-message {
+    width: 100%;
+    background-color: black;
+    outline: 0;
+    border: 0;
+    color: white;
+    padding: 7px;
+}
+
+input.server-message:focus {
+    border: 0;
+    outline: 0;
+}
