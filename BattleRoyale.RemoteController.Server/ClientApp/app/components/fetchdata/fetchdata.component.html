@@ -11,7 +11,7 @@
         Those are the machines currently connected to the server <br />
         When you execute the command in the command line, those machines will execute the same command locally
     </p>
-    <a [routerLink]="['/commandAll']">
+    <a (click)="navigateToCommandAll()">
         <span class='glyphicon glyphicon-cog'></span> Execute commands for ALL machine connected
     </a>
 
@@ -32,7 +32,7 @@
                 <td>{{ client.hardDriveInformation[0].availableSize/1024 }} MB out of {{ client.hardDriveInformation[0].totalSize/1024 }} MB available</td>
                 <td>{{ client.localIPAddress }}</td>
                 <td>
-                    <a [routerLink]="['/command', client.localIPAddress]">
+                    <a (click)="navigateToCommandLine(client.localIPAddress)">
                         <span class='glyphicon glyphicon-cog' title="Execute commands for this machine"></span>
                     </a>
                 </td>

@@ -1,4 +1,35 @@
-<h1>Command Panel</h1>
+<h3>Command Panel</h3>
+
+<div *ngIf="client">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Machine Name: {{client.machineName}}</li>
+                    <li class="list-group-item">Local IP Address: {{client.localIPAddress}}</li>
+                    <li class="list-group-item">Lastest .Net Framework Version Installed: {{client.installedDotNetVersion}}</li>
+                    <li class="list-group-item">
+                        Hard drive information
+                        <ul>
+                            <li *ngFor="let drive of client.hardDriveInformation">
+                                {{drive.availableSize/1204}} Mb out of {{drive.totalSize/1024}} Mb available in Drive {{drive.hardDriveName}}
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Version: {{client.windowsSpecs.version}}</li>
+                    <li class="list-group-item">Firewall Active: {{client.IsFirewallActivated}}</li>
+                    <li class="list-group-item">Antivirus: {{client.InstalledAntivirus? InstalledAntivirus : "none"}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="bash" *ngIf="connected">
     <ul class="list-messages">

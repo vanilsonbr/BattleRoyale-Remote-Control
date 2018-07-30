@@ -27,6 +27,13 @@ namespace BatteRoyale.RemoteController.Server.Services.Interface
         void OnClientDisconnected(string clientMachineName);
 
         /// <summary>
+        /// retrieves the client by its Local IP Address
+        /// </summary>
+        /// <param name="ipAddress">The client's local ip address</param>
+        /// <returns></returns>
+        Client GetClient(string ipAddress);
+
+        /// <summary>
         /// Send a command to the connected client. The command must be a valid CMD or PoweShell command
         /// </summary>
         /// <param name="fullCommand">The command to be sent</param>

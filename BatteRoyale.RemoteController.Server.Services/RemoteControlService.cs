@@ -24,6 +24,12 @@ namespace BatteRoyale.RemoteController.Server.Services
             return _clientConnections;
         }
 
+        public Client GetClient(string ipAddress)
+        {
+            var client = _clientConnections.FirstOrDefault(c => c.LocalIPAddress == ipAddress);
+            return client;
+        }
+
         public void OnClientConnected(Client client)
         {
             bool clientExists = _clientConnections.Any(

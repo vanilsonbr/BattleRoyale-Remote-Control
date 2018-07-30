@@ -1,0 +1,6 @@
+﻿
+<div *ngIf="clients">
+    <div *ngFor="let client of clients" class="col-sm-6 command-screen">
+        <command [client]="client"> </command>
+    </div>
+</div>

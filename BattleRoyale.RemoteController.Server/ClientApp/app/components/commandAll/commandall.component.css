@@ -1,0 +1,7 @@
+﻿.command-screen {
+    font-size: 0.8em;
+}
+.command-screen .bash {
+    max-height: 200px !important;
+    min-height: 200px !important;
+}

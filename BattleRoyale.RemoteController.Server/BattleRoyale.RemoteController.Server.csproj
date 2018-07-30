@@ -26,8 +26,30 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\components\commandAll\commandall.component.ts" />
+    <None Remove="ClientApp\app\models\Antivirus.ts" />
+    <None Remove="ClientApp\app\models\Client.ts" />
+    <None Remove="ClientApp\app\models\CommandMessage.ts" />
+    <None Remove="ClientApp\app\models\CommandResult.ts" />
+    <None Remove="ClientApp\app\models\HardDriveInformation.ts" />
+    <None Remove="ClientApp\app\models\WindowsSpecs.ts" />
+    <None Remove="ClientApp\app\services\client.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BattleRoyale.RemoteController.Server.CrossCutting\BattleRoyale.RemoteController.Server.CrossCutting.csproj" />
     <ProjectReference Include="..\BattleRoyale.RemoteController.Server.Domain\BattleRoyale.RemoteController.Server.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\commandAll\commandall.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\CommandMessage.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\CommandResult.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\WindowsSpecs.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\HardDriveInformation.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\Antivirus.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\Client.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\client.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

@@ -1,36 +1,58 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
+import { CommandResult } from '../../models/CommandResult';
+import { CommandMessage, MessageType } from '../../models/CommandMessage';
+import { Client } from '../../models/Client';
+import { ClientService } from '../../services/client.service';
 
 @Component({
     selector: 'command',
     templateUrl: './command.component.html',
     styleUrls: ['./command.component.css']
 })
-export class CommandComponent {
+export class CommandComponent implements OnInit {
+
+
     public textInputMessage: string = "";
     public connectionMessage: string = "Connection to Client...";
-    public connected: boolean = false;
-    public messages: Array<CommandMessage>;
+    public connected: boolean | null = false;
+    public messages: CommandMessage[];
     public clientUrl: string = "";
     private subscriber : any = null;
 
-    constructor(private http: Http, private route: ActivatedRoute) {
+    @Input() client: Client | null;
+
+    constructor(private http: Http, private clientService : ClientService) {
         this.messages = [];
+        this.client = null;
     }
 
-    ngOnInit() {
-        this.subscriber = this.route.params.subscribe(params => {
-            this.clientUrl = params['ipAddress'];
-            this.clientUrl = "http://" + this.clientUrl + "/";
+    ngOnInit(): void {
+        // if the client service has a client selected, I will execute commands only for that client
+        var ipAddress: string | null = this.clientService.getCurrentClientIpAddress();
 
-            this.initCommandLine();
+        if (ipAddress) {
+            this.clientService.getClient(ipAddress).subscribe(result => {
+                this.client = result as Client;
+                this.clientUrl = "http://" + result.localIPAddress + "/";
+                this.initCommandLine();
+            }, error => {
+                console.error(error);
+                this.connected = null;
+            });
+        } else {
+            // it means that i'm in the commandAll screen and will execute command to all the machines connected
+            // meaning that the parent component passed the client via Input
+            if (this.client == null) {
+                // but if the client is not defined, it is an error.
+                this.connected = null;
 
-        })
-    }
-
-    ngOnDestroy() {
-        this.subscriber.unsubscribe();
+            } else {
+                this.clientUrl = "http://" + this.client.localIPAddress + "/";
+                this.initCommandLine();
+            }
+        }
     }
 
     initCommandLine() {
@@ -89,22 +111,4 @@ export class CommandComponent {
         }
 
     }
-}
-
-enum MessageType {
-    server,
-    client
-}
-
-interface CommandMessage {
-    message: string;
-    messageType: MessageType;
-}
-
-interface CommandResult {
-    WorkingDirectory: string;
-    Result: string;
-    CommandSent: string;
-    Error: string
-    Success: boolean;
 }

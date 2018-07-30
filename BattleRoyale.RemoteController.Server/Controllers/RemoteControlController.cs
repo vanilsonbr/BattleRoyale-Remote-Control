@@ -27,6 +27,13 @@ namespace BattleRoyale.RemoteController.Server.Controllers
             return connectedClients;
         }
 
+        [HttpGet("[action]")]
+        public Client GetClient(string ipAddress)
+        {
+            var client = _service.GetClient(ipAddress);
+            return client;
+        }
+
         [HttpPost("[action]")]
         public void AddClient([FromBody] Client client)
         {

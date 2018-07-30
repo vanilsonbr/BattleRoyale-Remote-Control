@@ -1,5 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
+import { Router } from "@angular/router";
+import { Client } from "../../models/Client";
+import { ClientService } from '../../services/client.service';
 
 @Component({
     selector: 'fetchdata',
@@ -7,40 +10,30 @@ import { Http } from '@angular/http';
 })
 export class FetchDataComponent {
     public clients: Client[] | undefined;
-    public clientsRetrieved: boolean = false;
+    public clientsRetrieved: boolean | null = false;
 
-    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
-        http.get(baseUrl + 'api/RemoteControl/ConnectedClients').subscribe(result => {
-            this.clients = result.json() as Client[];
-            this.clientsRetrieved = true; 
+    constructor(http: Http,
+        private router: Router,
+        @Inject('BASE_URL') baseUrl: string,
+        private clientService: ClientService 
+    ) {
+        this.clientService.getConnectedClients().subscribe(clients => {
+            this.clients = clients as Client[];
+            this.clientsRetrieved = true;
         }, error => {
             console.error(error);
+            this.clientsRetrieved = null;
         });
     }
-}
 
-interface Antivirus {
-    name: string;
-    version: string;
-    vendor: string;
-}
+    navigateToCommandLine(ipAddress: string) {
+        this.clientService.setCurrentClientIPAddress(ipAddress);
+        this.router.navigate(["command"]);
+    }
 
-interface WindowsSpecs {
-    version: string;
-    servicePack: string;
-}
+    navigateToCommandAll() {
+        this.clientService.setCurrentClientIPAddress("");
+        this.router.navigate(["commandall"]);
+    }
 
-interface HardDriveInformation {
-    totalSize: string;
-    availableSize: string;
-}
-
-interface Client {
-    machineName: string;
-    localIPAddress: string;
-    installedAntivirus: Antivirus;
-    isFirewallActivated: boolean;
-    windowsSpecs: WindowsSpecs;
-    installedDotNetVersion: string;
-    hardDriveInformation: HardDriveInformation[];
 }

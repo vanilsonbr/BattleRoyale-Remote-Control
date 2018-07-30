@@ -9,12 +9,15 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CommandComponent } from './components/command/command.component';
+import { ClientService } from './services/client.service';
+import { CommandAllComponent } from './components/commandAll/commandall.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
         CommandComponent,
+        CommandAllComponent,
         FetchDataComponent,
         HomeComponent
     ],
@@ -25,11 +28,13 @@ import { CommandComponent } from './components/command/command.component';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'command/:ipAddress', component: CommandComponent  },
+            { path: 'command', component: CommandComponent  },
             { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'commandall', component: CommandAllComponent },
             { path: '**', redirectTo: 'home' }
         ])
-    ]
+    ],
+    providers: [ClientService]
 })
 export class AppModuleShared {
 }
