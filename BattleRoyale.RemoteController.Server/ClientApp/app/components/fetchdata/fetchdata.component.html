@@ -1,4 +1,4 @@
-<h1>Connected Devices</h1>
+<h1>Machines connected</h1>
 
 <div *ngIf="alerts" class="alert-box">
         <div *ngFor="let alert of alerts" class="alert alert-{{alert.type}} alert-dismissible show" role="alert">
@@ -20,7 +20,7 @@
         Those are the machines currently connected to the server <br />
         When you execute the command in the command line, those machines will execute the same command locally
     </p>
-    <a (click)="navigateToCommandAll()">
+    <a (click)="navigateToCommandAll()" class="commands-all-link">
         <span class='glyphicon glyphicon-cog'></span> Execute commands for ALL machine connected
     </a>
 
