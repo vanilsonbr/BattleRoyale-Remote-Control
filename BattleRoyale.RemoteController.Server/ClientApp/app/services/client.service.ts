@@ -38,4 +38,13 @@ export class ClientService {
             return clients;
         });
     }
+
+    handshake(clientIpAddress: string): Observable<boolean> {
+        var url = "http://" + clientIpAddress + "/handshake";
+
+        return this.http.get(url).map(result => {
+            var r: boolean = result.json() as boolean;
+            return r;
+        });
+    }
 }

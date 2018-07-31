@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\app\components\commandAll\commandall.component.ts" />
+    <None Remove="ClientApp\app\components\fetchdata\fetchdata-component.css" />
     <None Remove="ClientApp\app\models\Antivirus.ts" />
     <None Remove="ClientApp\app\models\Client.ts" />
     <None Remove="ClientApp\app\models\CommandMessage.ts" />

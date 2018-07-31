@@ -1,51 +1,65 @@
-<h3>Command Panel</h3>
 
-<div *ngIf="client">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="card">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Machine Name: {{client.machineName}}</li>
-                    <li class="list-group-item">Local IP Address: {{client.localIPAddress}}</li>
-                    <li class="list-group-item">Lastest .Net Framework Version Installed: {{client.installedDotNetVersion}}</li>
-                    <li class="list-group-item">
-                        Hard drive information
-                        <ul>
-                            <li *ngFor="let drive of client.hardDriveInformation">
-                                {{drive.availableSize/1204}} Mb out of {{drive.totalSize/1024}} Mb available in Drive {{drive.hardDriveName}}
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+
+<div *ngIf="connected == false">
+    Loading...
+</div>
+
+<div *ngIf="!(connected == true || connected == false)">
+    <h3>An error occurred trying to connect to the machine</h3>
+    <h3>The server cannot reach the client :(</h3>
+</div>
+
+<div *ngIf="connected == true">
+    <h3>Command Panel</h3>
+
+    <div *ngIf="client">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Machine Name: {{client.machineName}}</li>
+                        <li class="list-group-item">Local IP Address: {{client.localIPAddress}}</li>
+                        <li class="list-group-item">Lastest .Net Framework Version Installed: {{client.installedDotNetVersion}}</li>
+                        <li class="list-group-item">
+                            Hard drive information
+                            <ul>
+                                <li *ngFor="let drive of client.hardDriveInformation">
+                                    {{drive.availableSize/1204}} Mb out of {{drive.totalSize/1024}} Mb available in Drive {{drive.hardDriveName}}
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Version: {{client.windowsSpecs.version}}</li>
-                    <li class="list-group-item">Firewall Active: {{client.IsFirewallActivated}}</li>
-                    <li class="list-group-item">Antivirus: {{client.InstalledAntivirus? InstalledAntivirus : "none"}}</li>
-                </ul>
+            <div class="col-sm-6">
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Version: {{client.windowsSpecs.version}}</li>
+                        <li class="list-group-item">Firewall Active: {{client.IsFirewallActivated}}</li>
+                        <li class="list-group-item">Antivirus: {{client.InstalledAntivirus? InstalledAntivirus : "none"}}</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="bash" *ngIf="connected">
-    <ul class="list-messages">
-        <li *ngFor="let message of messages">
-            <span *ngIf="message.messageType == 1" style="white-space: pre-line; color: yellow">
-                {{message.message}}</span>
-            <span *ngIf="message.messageType == 0">
-                <strong>Server></strong> {{message.message}}
-            </span>
-        </li>
-    </ul>
-    <span style="padding-left: 7px; color: white">
-        <strong>Server> </strong>{{textInputMessage}}
-    </span>
-    
-</div>
-<div *ngIf="connected">
-    <input class="server-message" type="text" [(ngModel)]="textInputMessage" (keydown.enter)="sendMessage()">
+    <div class="bash">
+        <ul class="list-messages">
+            <li *ngFor="let message of messages">
+                <span *ngIf="message.messageType == 1" style="white-space: pre-line; color: yellow">
+                    {{message.message}}
+                </span>
+                <span *ngIf="message.messageType == 0">
+                    <strong>Server></strong> {{message.message}}
+                </span>
+            </li>
+        </ul>
+        <span style="padding-left: 7px; color: white">
+            <strong>Server> </strong>{{textInputMessage}}
+        </span>
+
+    </div>
+    <div>
+        <input class="server-message" type="text" [(ngModel)]="textInputMessage" (keydown.enter)="sendMessage()">
+    </div>
 </div>

@@ -1,5 +1,14 @@
 <h1>Connected Devices</h1>
 
+<div *ngIf="alerts" class="alert-box">
+        <div *ngFor="let alert of alerts" class="alert alert-{{alert.type}} alert-dismissible show" role="alert">
+            {{alert.message}}
+            <button type="button" class="close" (click)="dismissAlert(alert.id)">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+</div>
+
 <p *ngIf="!clients || (!!clients && !clientsRetrieved)"><em>Loading...</em></p>
 
 <h4 *ngIf="!!clients && clients.length == 0 && clientsRetrieved">
@@ -34,6 +43,9 @@
                 <td>
                     <a (click)="navigateToCommandLine(client.localIPAddress)">
                         <span class='glyphicon glyphicon-cog' title="Execute commands for this machine"></span>
+                    </a>
+                    <a (click)="testMachineConnection(client.localIPAddress)">
+                        <span class='glyphicon glyphicon-off' title="Test machine connection"></span>
                     </a>
                 </td>
             </tr>

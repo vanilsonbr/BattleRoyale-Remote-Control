@@ -1,6 +1,24 @@
 ﻿
+<div class="row">
+    <div _ngcontent-c2="" class="col-sm-12">
+        <h2>Command Line - Broadcast</h2>
+
+        <h4>Here you can send a command to all the machines connected. They will display the result in their respective command line interface</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-1">
+        Command: 
+    </div>
+    <div class="col-sm-11">
+        <input [(ngModel)]="commandToAll" (keydown.enter)="sendCommandAll()" style="width: 100%" />
+    </div>
+</div>
+
+
 <div *ngIf="clients">
     <div *ngFor="let client of clients" class="col-sm-6 command-screen">
-        <command [client]="client"> </command>
+        <command [client]="client" #cmdComp> </command>
     </div>
 </div>

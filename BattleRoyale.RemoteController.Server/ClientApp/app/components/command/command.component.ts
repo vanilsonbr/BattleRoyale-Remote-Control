@@ -19,6 +19,7 @@ export class CommandComponent implements OnInit {
     public connected: boolean | null = false;
     public messages: CommandMessage[];
     public clientUrl: string = "";
+    public ipAddress: string | null = "";
     private subscriber : any = null;
 
     @Input() client: Client | null;
@@ -30,12 +31,12 @@ export class CommandComponent implements OnInit {
 
     ngOnInit(): void {
         // if the client service has a client selected, I will execute commands only for that client
-        var ipAddress: string | null = this.clientService.getCurrentClientIpAddress();
+        this.ipAddress = this.clientService.getCurrentClientIpAddress();
 
-        if (ipAddress) {
-            this.clientService.getClient(ipAddress).subscribe(result => {
+        if (this.ipAddress) {
+            this.clientService.getClient(this.ipAddress).subscribe(result => {
                 this.client = result as Client;
-                this.clientUrl = "http://" + result.localIPAddress + "/";
+                this.clientUrl = "http://" + this.ipAddress + "/";
                 this.initCommandLine();
             }, error => {
                 console.error(error);
@@ -45,13 +46,21 @@ export class CommandComponent implements OnInit {
             // it means that i'm in the commandAll screen and will execute command to all the machines connected
             // meaning that the parent component passed the client via Input
             if (this.client == null) {
-                // but if the client is not defined, it is an error.
                 this.connected = null;
+                return;
+            }
 
-            } else {
+            this.clientService.handshake(this.client.localIPAddress).subscribe(ok => {
+                if (this.client == null) return; // just to supress typescript erroneous error ('Object is possibly null')
+
                 this.clientUrl = "http://" + this.client.localIPAddress + "/";
                 this.initCommandLine();
-            }
+                this.connected = true;
+            }, error => {
+                console.error(error);
+                this.connected = null;
+            });
+
         }
     }
 
@@ -71,12 +80,13 @@ export class CommandComponent implements OnInit {
         }, error => {
             console.error(error);
             this.connectionMessage = "Client disconnected!";
+            this.connected = null;
         });
     }
 
-    public sendMessage() {
+    public sendMessage(command: string = "") {
 
-        var command = this.textInputMessage ? this.textInputMessage.trim() : "";
+        var command = command? command : this.textInputMessage ? this.textInputMessage.trim() : "";
 
         if (command) {
             var uriCommand: string = this.clientUrl + "receivecommand";
